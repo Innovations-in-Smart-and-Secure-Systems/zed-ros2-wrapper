@@ -244,7 +244,7 @@ def launch_setup(context, *args, **kwargs):
             'use_sim_time': publish_svo_clock,
             'robot_description': Command(xacro_command)
         }],
-        remappings=[('/tf', 'tf'), ('/tf_static', 'tf_static')]
+        remappings=[('/tf', '/tf'), ('/tf_static', '/tf_static')]
     )
     return_array.append(rsp_node)
 
@@ -319,7 +319,7 @@ def launch_setup(context, *args, **kwargs):
             plugin='stereolabs::ZedCamera',
             name=node_name_val,
             parameters=node_parameters,
-            remappings=[('/tf', 'tf'), ('/tf_static', 'tf_static')],
+            remappings=[('/tf', '/tf'), ('/tf_static', '/tf_static')],
             extra_arguments=[{'use_intra_process_comms': enable_ipc}]
         )
     else: # 'zedxonegs' or 'zedxone4k')
@@ -329,7 +329,7 @@ def launch_setup(context, *args, **kwargs):
             plugin='stereolabs::ZedCameraOne',
             name=node_name_val,
             parameters=node_parameters,
-            remappings=[('/tf', 'tf'), ('/tf_static', 'tf_static')],
+            remappings=[('/tf', '/tf'), ('/tf_static', '/tf_static')],
             extra_arguments=[{'use_intra_process_comms': enable_ipc}]
         )
     
