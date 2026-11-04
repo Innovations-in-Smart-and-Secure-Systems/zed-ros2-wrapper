@@ -382,7 +382,7 @@ def launch_setup(context, *args, **kwargs):
             'use_sim_time': publish_svo_clock,
             'robot_description': Command(xacro_command)
         }],
-        remappings=[('robot_description', camera_name_val+'_description')]
+        remappings=[('/tf', '/tf'), ('/tf_static', '/tf_static')]
     )
     return_array.append(rsp_node)
 
@@ -459,7 +459,8 @@ def launch_setup(context, *args, **kwargs):
             plugin='stereolabs::ZedCamera',
             name=node_name_val,
             parameters=node_parameters,
-            extra_arguments=[{'use_intra_process_comms': enable_ipc_effective}]
+            remappings=[('/tf', '/tf'), ('/tf_static', '/tf_static')],
+            extra_arguments=[{'use_intra_process_comms': enable_ipc}]
         )
     else:  # camera_model_val == 'zedxonegs' or camera_model_val == 'zedxone4k' or camera_model_val == 'zedxonehdr'
         zed_wrapper_component = ComposableNode(
@@ -468,7 +469,8 @@ def launch_setup(context, *args, **kwargs):
             plugin='stereolabs::ZedCameraOne',
             name=node_name_val,
             parameters=node_parameters,
-            extra_arguments=[{'use_intra_process_comms': enable_ipc_effective}]
+            remappings=[('/tf', '/tf'), ('/tf_static', '/tf_static')],
+            extra_arguments=[{'use_intra_process_comms': enable_ipc}]
         )
 
     full_container_name = '/' + namespace_val + '/' + container_name_val
